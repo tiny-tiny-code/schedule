@@ -6,7 +6,8 @@
 const fs = require('fs');
 const path = require('path');
 
-const DB_PATH = path.join(__dirname, 'scheduler.json');
+const DATA_DIR = process.env.DATA_DIR || __dirname;
+const DB_PATH = path.join(DATA_DIR, 'scheduler.json');
 const TMP_PATH = DB_PATH + '.tmp';
 
 const EMPTY = {
