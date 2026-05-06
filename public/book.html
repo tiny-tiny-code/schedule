@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Select your slot</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<div class="page-wrap">
+  <div id="loading" class="empty-state">Loading available slots…</div>
+
+  <div id="main" style="display:none">
+    <div class="page-header">
+      <h1 id="book-title"></h1>
+      <p id="book-desc"></p>
+    </div>
+
+    <div id="error-banner" class="alert alert-error" style="display:none"></div>
+
+    <div class="card">
+      <h2>Your name</h2>
+      <div class="field">
+        <label for="participant-name">First and last name <span style="color:var(--danger)">*</span></label>
+        <input type="text" id="participant-name" placeholder="e.g. Jane Smith" maxlength="120" autocomplete="name">
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Choose your preferred slot</h2>
+      <div id="slots-list"></div>
+      <div id="no-slots" class="empty-state" style="display:none">
+        No slots are currently available. Please contact the researcher.
+      </div>
+    </div>
+
+    <div style="display:flex; justify-content:flex-end">
+      <button class="btn btn-primary" id="submit-btn" onclick="submitBooking()">Confirm booking</button>
+    </div>
+  </div>
+
+  <div id="success" class="card success-screen" style="display:none">
+    <div class="checkmark">✓</div>
+    <h2>You're booked!</h2>
+    <p id="success-detail" style="margin-top:.5rem"></p>
+  </div>
+
+  <div id="error-screen" class="card" style="display:none">
+    <p id="error-msg" style="color:var(--danger)"></p>
+  </div>
+</div>
+<script src="/js/book.js"></script>
+</body>
+</html>

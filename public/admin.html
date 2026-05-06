@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Scheduler — Admin</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<div class="page-wrap">
+  <div id="loading" class="empty-state">Loading…</div>
+  <div id="main" style="display:none">
+    <div class="page-header">
+      <h1 id="admin-title"></h1>
+      <p id="admin-desc" style="color:var(--text-muted)"></p>
+    </div>
+
+    <div class="card">
+      <h2>Participant link</h2>
+      <p style="font-size:.875rem;color:var(--text-muted);margin-bottom:.75rem">Share this with your participants.</p>
+      <div class="copy-row">
+        <input type="text" id="participant-link" readonly>
+        <button class="btn btn-secondary" onclick="copyLink('participant-link', this)">Copy</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Scheduled slots</h2>
+      <div id="slots-table-wrap"></div>
+    </div>
+
+    <div class="card">
+      <h2>Bookings</h2>
+      <div id="bookings-table-wrap"></div>
+    </div>
+  </div>
+  <div id="error-screen" class="card" style="display:none">
+    <p id="error-msg" style="color:var(--danger)"></p>
+  </div>
+</div>
+<script src="/js/admin.js"></script>
+</body>
+</html>

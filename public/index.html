@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Research Scheduler — Setup</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<div class="page-wrap">
+  <div class="page-header">
+    <h1>Research Scheduler</h1>
+    <p>Set up your interview or focus group scheduling page.</p>
+  </div>
+
+  <div class="steps">
+    <div class="step active" id="step-ind-1">1 · Study details</div>
+    <div class="step" id="step-ind-2">2 · Time slots</div>
+    <div class="step" id="step-ind-3">3 · Select dates</div>
+    <div class="step" id="step-ind-4">4 · Review &amp; publish</div>
+  </div>
+
+  <div id="error-banner" class="alert alert-error" style="display:none"></div>
+
+  <!-- Step 1: Study details -->
+  <div id="step-1" class="card">
+    <h2>Study details</h2>
+    <div class="field">
+      <label for="title">Study title <span style="color:var(--danger)">*</span></label>
+      <input type="text" id="title" placeholder="e.g. UX Research Interviews — May 2026" maxlength="120">
+    </div>
+    <div class="field">
+      <label for="description">Description / instructions for participants (optional)</label>
+      <textarea id="description" placeholder="e.g. Please select the time slot that works best for you. Sessions last approximately 45 minutes."></textarea>
+    </div>
+    <div style="display:flex; justify-content:flex-end">
+      <button class="btn btn-primary" onclick="goTo(2)">Next: Time slots →</button>
+    </div>
+  </div>
+
+  <!-- Step 2: Slot templates -->
+  <div id="step-2" class="card" style="display:none">
+    <h2>Time slot templates</h2>
+    <p style="font-size:.875rem;color:var(--text-muted);margin-bottom:1rem">
+      Define the time windows you want to offer. You can activate them per day in the next step.
+    </p>
+    <div class="template-list" id="template-list"></div>
+    <button class="btn btn-secondary btn-sm" onclick="addTemplate()">+ Add time slot</button>
+    <div style="display:flex; justify-content:space-between; margin-top:1.25rem">
+      <button class="btn btn-ghost" onclick="goTo(1)">← Back</button>
+      <button class="btn btn-primary" onclick="goTo(3)">Next: Select dates →</button>
+    </div>
+  </div>
+
+  <!-- Step 3: Calendar + per-day activation -->
+  <div id="step-3" class="card" style="display:none">
+    <h2>Select dates</h2>
+    <p style="font-size:.875rem;color:var(--text-muted);margin-bottom:1rem">
+      Click dates to activate them, then choose which slots to offer each day.
+    </p>
+
+    <div class="calendar-nav">
+      <button class="btn btn-ghost btn-sm" onclick="prevMonth()">‹</button>
+      <span id="cal-month-label"></span>
+      <button class="btn btn-ghost btn-sm" onclick="nextMonth()">›</button>
+    </div>
+    <div class="calendar-grid" id="cal-grid"></div>
+
+    <div id="date-slots-list" class="date-slots-list"></div>
+
+    <div style="display:flex; justify-content:space-between; margin-top:1.25rem">
+      <button class="btn btn-ghost" onclick="goTo(2)">← Back</button>
+      <button class="btn btn-primary" onclick="goTo(4)">Next: Review →</button>
+    </div>
+  </div>
+
+  <!-- Step 4: Review & publish -->
+  <div id="step-4" class="card" style="display:none">
+    <h2>Review &amp; publish</h2>
+    <div id="review-content"></div>
+    <div style="display:flex; justify-content:space-between; margin-top:1.25rem">
+      <button class="btn btn-ghost" onclick="goTo(3)">← Back</button>
+      <button class="btn btn-primary" id="publish-btn" onclick="publish()">Publish &amp; get link</button>
+    </div>
+  </div>
+
+  <!-- Step 5: Done (share link) -->
+  <div id="step-5" style="display:none">
+    <div class="card">
+      <h2>Your scheduling page is live!</h2>
+      <p style="font-size:.875rem;color:var(--text-muted);margin-bottom:1rem">
+        Share the participant link below. Keep your admin link private — it shows participant names.
+      </p>
+
+      <div class="field">
+        <label>Participant link (share this)</label>
+        <div class="copy-row">
+          <input type="text" id="participant-link" readonly>
+          <button class="btn btn-secondary" onclick="copyLink('participant-link', this)">Copy</button>
+        </div>
+      </div>
+
+      <div class="field" style="margin-top:.75rem">
+        <label>Your admin link (keep private)</label>
+        <div class="copy-row">
+          <input type="text" id="admin-link" readonly>
+          <button class="btn btn-ghost" onclick="copyLink('admin-link', this)">Copy</button>
+        </div>
+      </div>
+
+      <div class="alert alert-info" style="margin-top:1rem;margin-bottom:0">
+        <strong>Save both links.</strong> They are not stored anywhere accessible — if you lose your admin link, you will not be able to view bookings.
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="/js/setup.js"></script>
+</body>
+</html>
