@@ -8,9 +8,3 @@ services:
     envVars:
       - key: PORT
         value: 10000
-      - key: DATA_DIR
-        value: /data
-    disk:
-      name: scheduler-data
-      mountPath: /data
-      sizeGB: 1
