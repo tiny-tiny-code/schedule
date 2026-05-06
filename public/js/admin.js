@@ -56,13 +56,12 @@ function renderSlots() {
   }
 
   const rows = sessionData.slots.map(s => {
-    const booked = s.booking_count;
-    const pct = Math.round((booked / s.capacity) * 100);
+    const booked = s.bookingCount;
     const full = booked >= s.capacity;
     return `
       <tr id="slot-row-${s.id}">
-        <td>${fmtDate(s.slot_date)}</td>
-        <td>${esc(s.start_time)} – ${esc(s.end_time)}</td>
+        <td>${fmtDate(s.slotDate)}</td>
+        <td>${esc(s.startTime)} – ${esc(s.endTime)}</td>
         <td>
           <span class="badge ${full ? 'badge-red' : 'badge-green'}">${booked}/${s.capacity}</span>
         </td>
@@ -97,10 +96,10 @@ function renderBookings() {
 
   const rows = sessionData.bookings.map(b => `
     <tr id="booking-row-${b.id}">
-      <td>${esc(b.participant_name)}</td>
-      <td>${fmtDate(b.slot_date)}</td>
-      <td>${esc(b.start_time)} – ${esc(b.end_time)}</td>
-      <td style="color:var(--text-muted);font-size:.8rem">${fmtDateTime(b.created_at)}</td>
+      <td>${esc(b.participantName)}</td>
+      <td>${fmtDate(b.slotDate)}</td>
+      <td>${esc(b.startTime)} – ${esc(b.endTime)}</td>
+      <td style="color:var(--text-muted);font-size:.8rem">${fmtDateTime(b.createdAt)}</td>
       <td>
         <button class="btn btn-danger btn-sm" onclick="deleteBooking(${b.id})">Remove</button>
       </td>
@@ -144,7 +143,7 @@ async function deleteSlot(slotId) {
   if (res.ok) {
     sessionData.slots = sessionData.slots.filter(s => s.id !== slotId);
     sessionData.bookings = sessionData.bookings.filter(b => {
-      const slot = sessionData.slots.find(s => s.id === b.scheduled_slot_id);
+      const slot = sessionData.slots.find(s => s.id === b.scheduledSlotId);
       return !!slot;
     });
     await load(); // reload for accurate booking counts

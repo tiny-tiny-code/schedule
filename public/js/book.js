@@ -63,13 +63,13 @@ function renderSlots(slots) {
   // Group by date
   const byDate = {};
   for (const s of slots) {
-    if (!byDate[s.slot_date]) byDate[s.slot_date] = [];
-    byDate[s.slot_date].push(s);
+    if (!byDate[s.slotDate]) byDate[s.slotDate] = [];
+    byDate[s.slotDate].push(s);
   }
 
   container.innerHTML = Object.keys(byDate).sort().map(date => {
     const daySlots = byDate[date].map(s => {
-      const spotsLeft = s.capacity - s.booking_count;
+      const spotsLeft = s.capacity - s.bookingCount;
       const spotsLabel = s.capacity === 1
         ? ''
         : `${spotsLeft} spot${spotsLeft !== 1 ? 's' : ''} left`;
@@ -78,7 +78,7 @@ function renderSlots(slots) {
         <div class="slot-option" id="slot-opt-${s.id}" onclick="selectSlot(${s.id})">
           <input type="radio" name="slot" value="${s.id}" id="slot-${s.id}">
           <label for="slot-${s.id}" class="slot-time" style="cursor:pointer">
-            ${esc(s.start_time)} – ${esc(s.end_time)}
+            ${esc(s.startTime)} – ${esc(s.endTime)}
           </label>
           ${spotsLabel ? `<span class="slot-spots">${esc(spotsLabel)}</span>` : ''}
         </div>
@@ -127,7 +127,7 @@ async function submitBooking() {
 
     const slot = slots.find(s => s.id === selectedSlotId);
     const detail = slot
-      ? `${fmtDate(slot.slot_date)}, ${slot.start_time} – ${slot.end_time}`
+      ? `${fmtDate(slot.slotDate)}, ${slot.startTime} – ${slot.endTime}`
       : '';
     document.getElementById('success-detail').textContent =
       `Slot confirmed: ${detail}. The researcher will be in touch.`;
